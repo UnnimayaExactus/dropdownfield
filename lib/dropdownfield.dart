@@ -49,6 +49,7 @@ class DropDownField extends FormField<String> {
   final TextStyle textStyle;
   final bool required;
   final bool enabled;
+
   final List<dynamic> items;
   final List<TextInputFormatter> inputFormatters;
   final FormFieldSetter<dynamic> setter;
@@ -146,6 +147,13 @@ class DropDownField extends FormField<String> {
                         onSaved: setter,
                         enabled: enabled,
                         inputFormatters: inputFormatters,
+                        onChanged: (value) {
+                          if (value.isEmpty) {
+                            state.setState(() {
+                              state._showdropdown = !state._showdropdown;
+                            });
+                          }
+                        },
                       ),
                     ),
                     IconButton(
